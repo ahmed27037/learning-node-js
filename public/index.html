@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  This is The Get request stage
+  <button
+  id="getrequest">
+   SEND IT
+  </button>
+</body>
+<script>
+  const btn = document.getElementById("getrequest")
+  async function sendMsg() {
+    const res = await fetch('/api/info', {
+      method: 'POST',
+      headers : {
+        "Content-Type" : "application/json"
+      },
+     body : JSON.stringify({information : 'This is from the web'})
+
+    })
+    console.log('Request Sent')
+  }
+  btn.addEventListener('click', sendMsg)
+</script>
+</html>

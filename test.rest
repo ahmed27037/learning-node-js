@@ -1,0 +1,19 @@
+###
+GET http://localhost:5505/
+
+###
+DELETE http://localhost:5505/delete/7/nice
+
+###
+POST http://localhost:5505/api.info
+Content-Type: application/json
+
+{
+  "information" : "my name is ahmed"
+}
+
+###
+
+PUT http://localhost:5505/api/?hey=ahmed&how=areyoudoing
+
+
