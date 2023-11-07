@@ -7,10 +7,38 @@ const PORT = 5505;
 
 app.use(express.json())
 app.use(express.static('public'))
+app.use(require('cors')())
+app.use(mw)
 
+function mw(req, res, next) {
+  console.log('HIT you some MIDDLEWARE')
+  const {id} = req.query
+  console.log('ID: ', id)
+  if (id != 8) {
+   return res.sendStatus(403)
+  } 
+  next()
+}
 // TEMP DATABASE
 const db = []
 
+// SCHEDULER
+function cron(ms, fn){
+  async function cb(){
+    clearTimeout(timeout)
+    await fn()
+    timeout = setTimeout(cb, ms)
+  }
+  let timeout = setTimeout(cb, ms)
+  return () => { }
+}
+
+
+function consoleDB(){
+  console.log('DB = ', db)
+}
+
+cron(1000, consoleDB)
 
 
 app.post('/api/info', (req,res) => {
@@ -28,11 +56,15 @@ app.put('/api', (req,res) => {
   res.sendStatus(200);
 })
 
+app.delete('/', mw, (req, res) => {
+  console.log("You came to the delete using you home route")
+  res.sendStatus(200);
+});
 
 
-app.delete('/delete/:id/:name', (req, res) => {
-  const {id, name} = req.params
-  console.log('You came using a delete request', name, id)
+app.delete('/delete/', mw, (req, res) => {
+  const { id } = req.params
+  console.log('You came using a delete request', id)
   res.sendStatus(200);
 });
 
