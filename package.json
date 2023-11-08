@@ -9,12 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "\"repository\" { \"type\" : \"git\", \"url\" : https://github.com/ahmed27037/my-node-project.git }"
+    "url": "https://github.com/ahmed27037/my-node-project.git"
   },
-  "keywords": [
-    "\"keywords\":",
-    "["
-  ],
   "author": "ahmed",
   "license": "ISC",
   "dependencies": {
